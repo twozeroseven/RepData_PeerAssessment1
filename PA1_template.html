@@ -165,8 +165,7 @@ legend(&quot;topright&quot;, c(&quot;Imputed&quot;, &quot;Non-imputed&quot;), co
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 <p>Created a plot to compare and contrast number of steps between the week and weekend.</p>
-<pre class="r"><code>weekdays &lt;- c(&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, 
-              &quot;Friday&quot;)
+<pre class="r"><code>weekdays &lt;- c(&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;)
 imputed_data$dow = as.factor(ifelse(is.element(weekdays(as.Date(imputed_data$date)),weekdays), &quot;Weekday&quot;, &quot;Weekend&quot;))
 
 steps_by_interval_i &lt;- aggregate(steps ~ interval + dow, imputed_data, mean)

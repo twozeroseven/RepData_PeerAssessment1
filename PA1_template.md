@@ -31,7 +31,7 @@ abline(v = rmean, col = "black", lwd = 2)
 abline(v = rmedian, col = "yellow", lwd = 2)
 ```
 
-![](PA1_template_files/figure-html/total-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)
 
 Mean total number of steps taken per day = 10766.19
 Median total number of steps taken per day = 10765
@@ -88,7 +88,7 @@ hist(steps_by_day$steps, main = paste("Total Steps Each Day"), col="red", xlab="
 legend("topright", c("Imputed", "Non-imputed"), col=c("blue", "red"), lwd=10)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -96,8 +96,7 @@ Created a plot to compare and contrast number of steps between the week and week
 
 
 ```r
-weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", 
-              "Friday")
+weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 imputed_data$dow = as.factor(ifelse(is.element(weekdays(as.Date(imputed_data$date)),weekdays), "Weekday", "Weekend"))
 
 steps_by_interval_i <- aggregate(steps ~ interval + dow, imputed_data, mean)
@@ -107,6 +106,6 @@ library(lattice)
 xyplot(steps_by_interval_i$steps ~ steps_by_interval_i$interval|steps_by_interval_i$dow, main="Average Steps per Day by Interval",xlab="Interval", ylab="Steps",layout=c(1,2), type="l")
 ```
 
-![](PA1_template_files/figure-html/]-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)
 
 There is a higher peak earlier on weekdays, and more overall activity on weekends.

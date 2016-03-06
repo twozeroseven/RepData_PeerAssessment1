@@ -9,7 +9,7 @@ output:
 
 Download zip file from URL - save locally, unzip and read CSV file into data variable
 
-```{r load}
+```{r echo = TRUE}
 if(!file.exists("activity.zip")) {
   temp <- tempfile()
   download.file("http://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip",temp)
@@ -25,7 +25,7 @@ data <- read.csv("activity.csv")
 
 Using aggregate extract the total num of steps taken per day - create a histogram, plot mean and median on graph.
 
-```{r total}
+```{r echo = TRUE}
 steps_by_day <- aggregate(steps ~ date, data, sum)
 hist(steps_by_day$steps, main = paste("Total Steps Each Day"), col="blue", xlab="Number of Steps")
 rmean <- mean(steps_by_day$steps)
@@ -51,7 +51,7 @@ Interval "835" contains on average the maximum number of steps (206.17 steps).
 
 ## Imputing missing values
 
-```{r impute}
+```{r echo = TRUE}
 na_number <- sum(is.na(data$steps))
 na_number
 ```
@@ -60,14 +60,14 @@ There are 2304 NA values in the dataset.
 We need to devise a strategy to fill in these values with data.  
 The strategy will be to insert the average 5 min interval (across all day) into missing intervals
 
-```{r}
+```{r echo = TRUE}
 incomplete <- sum(!complete.cases(data))
 imputed_data <- transform(data, steps = ifelse(is.na(data$steps), steps_by_interval$steps[match(data$interval, steps_by_interval$interval)], data$steps))
 ```
 
 Recalculate total number of steps again and create histogram showing both imputed and non-imputed datasets with a legend
 
-```{r}
+```{r echo = TRUE}
 steps_by_day_i <- aggregate(steps ~ date, imputed_data, sum)
 hist(steps_by_day_i$steps, main = paste("Total Steps Each Day"), col="blue", xlab="Number of Steps")
 
@@ -80,7 +80,7 @@ legend("topright", c("Imputed", "Non-imputed"), col=c("blue", "red"), lwd=10)
 
 Created a plot to compare and contrast number of steps between the week and weekend.
 
-```{r]}
+```{r echo = TRUE}
 weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
 imputed_data$dow = as.factor(ifelse(is.element(weekdays(as.Date(imputed_data$date)),weekdays), "Weekday", "Weekend"))
 
